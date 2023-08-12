@@ -5,6 +5,8 @@ const initialState = {
   time: 90,
   playing: false,
   timeIsUp: true,
+  wordsCollection: null,
+  screen: "menu",
 };
 
 const gameSlice = createSlice({
@@ -20,9 +22,20 @@ const gameSlice = createSlice({
     updateCurrentWord(state, action) {
       state.currentWord = action.payload;
     },
+    updateWordsCollection(state, action) {
+      state.wordsCollection = action.payload;
+    },
+    switchScreen(state, action) {
+      state.screen = action.payload;
+    },
   },
 });
 
 export const gameReducer = gameSlice.reducer;
-export const { updateIsPlaying, updateTimeIsUp, updateCurrentWord } =
-  gameSlice.actions;
+export const {
+  updateIsPlaying,
+  updateTimeIsUp,
+  updateCurrentWord,
+  updateWordsCollection,
+  switchScreen,
+} = gameSlice.actions;
