@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import "./App.css";
 import _ from "lodash";
 import words from "./words.json";
@@ -10,12 +10,11 @@ import { updateWordsCollection } from "./redux/game/gameSlice";
 const App = () => {
   const dispatch = useDispatch();
   const shuffledWords = _.shuffle(words);
-  const [count, setCount] = useState(0);
 
   useEffect(() => {
     dispatch(updateWordsCollection(shuffledWords));
     dispatch(switchScreen("round"));
-  }, []);
+  }, [dispatch, shuffledWords]);
 
   return <Game />;
 };

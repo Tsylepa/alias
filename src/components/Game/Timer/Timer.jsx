@@ -10,7 +10,7 @@ const Timer = () => {
   useEffect(() => {
     dispatch(updateTimeIsUp(false));
     dispatch(updateIsPlaying(true));
-  }, []);
+  }, [dispatch]);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -23,7 +23,7 @@ const Timer = () => {
     }
 
     return () => clearInterval(interval);
-  }, [countdown]);
+  }, [countdown, dispatch]);
 
   return (
     <div>
