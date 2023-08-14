@@ -5,7 +5,7 @@ const initialState = {
   time: 90,
   playing: false,
   timeIsUp: true,
-  wordsCollection: null,
+  wordsCollection: [],
   screen: "menu",
 };
 
