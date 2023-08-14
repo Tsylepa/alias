@@ -1,18 +1,11 @@
 import Timer from "./Timer";
 import Card from "./Card";
-import { useState, useEffect } from "react";
-import { updateCurrentWord, updateIsPlaying } from "src/redux/game/gameSlice";
-import {
-  getCurrentWord,
-  getTimeIsUp,
-  getScreen,
-} from "src/redux/game/gameSelectors";
+import { useState } from "react";
+import { updateIsPlaying } from "src/redux/game/gameSlice";
+import { getTimeIsUp, getScreen } from "src/redux/game/gameSelectors";
 import { useDispatch, useSelector } from "react-redux";
-import { getWordsCollection } from "../../redux/game/gameSelectors";
-import {
-  switchScreen,
-  updateWordsCollection,
-} from "../../redux/game/gameSlice";
+import { getWordsCollection } from "src/redux/game/gameSelectors";
+import { switchScreen, updateWordsCollection } from "src/redux/game/gameSlice";
 
 const Game = () => {
   const dispatch = useDispatch();
