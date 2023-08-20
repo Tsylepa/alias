@@ -6,8 +6,9 @@
   "homepage": "https://Tsylepa.github.io/alias/",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "build": "react-scripts build",
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
+    "lint:js": "eslint src/**/*.{js,jsx}",
     "preview": "vite preview"
   },
   "dependencies": {
