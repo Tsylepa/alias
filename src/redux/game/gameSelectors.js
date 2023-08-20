@@ -8,4 +8,10 @@ export const getIsPlaying = (state) => state.game.playing;
 
 export const getWordsCollection = (state) => state.game.wordsCollection;
 
+export const getRoundResults = (state) => state.game.roundResults;
+
 export const getScreen = (state) => state.game.screen;
+
+export const getTeams = (state) => state.game.teams;
+
+export const getCurrentTeam = (state) => state.game.currentTeam;
