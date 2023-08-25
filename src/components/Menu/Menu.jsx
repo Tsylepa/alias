@@ -1,11 +1,11 @@
 import { useDispatch, useSelector } from "react-redux";
 import { newGame } from "src/redux/game/gameSlice";
 import ScreenButton from "src/components/ScreenButton";
-import { getCurrentWord } from "src/redux/game/gameSelectors";
+import { getCurrentGame } from "src/redux/game/gameSelectors";
 
 export default function Menu() {
   const dispatch = useDispatch();
-  const currentWord = useSelector(getCurrentWord);
+  const currentGame = useSelector(getCurrentGame);
 
   function handleNewGame() {
     dispatch(newGame());
@@ -13,9 +13,7 @@ export default function Menu() {
 
   return (
     <>
-      {currentWord !== 0 && (
-        <ScreenButton screen="results" text="Continue Game" />
-      )}
+      {currentGame && <ScreenButton screen="results" text="Continue game" />}
 
       <ScreenButton screen="settings" text="New Game" onClick={handleNewGame} />
     </>

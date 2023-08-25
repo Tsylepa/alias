@@ -1,6 +1,6 @@
 import Timer from "./Timer";
 import Card from "./Card";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { updateIsPlaying } from "src/redux/game/gameSlice";
 import { getTimeIsUp } from "src/redux/game/gameSelectors";
 import { useDispatch, useSelector } from "react-redux";
@@ -8,6 +8,7 @@ import { getWordsCollection } from "src/redux/game/gameSelectors";
 import { updateWordsCollection } from "src/redux/game/gameSlice";
 import { updateRoundResults } from "src/redux/game/gameSlice";
 import useScreen from "src/hooks/useScreen";
+import { setCurrentGame } from "src/redux/game/gameSlice";
 
 const Game = () => {
   const dispatch = useDispatch();
@@ -15,6 +16,10 @@ const Game = () => {
   const wordsCollection = useSelector(getWordsCollection);
   const [results, setResults] = useState([]);
   const [, setScreen] = useScreen();
+
+  useEffect(() => {
+    dispatch(setCurrentGame(true));
+  }, []);
 
   function handleNextWord(guessed) {
     const updatedCollection = [...wordsCollection];

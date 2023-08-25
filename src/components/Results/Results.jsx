@@ -1,4 +1,4 @@
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {
   getTeams,
   getWinScore,
@@ -7,8 +7,10 @@ import {
 import useScreen from "src/hooks/useScreen";
 import { useEffect, useState } from "react";
 import ScreenButton from "../ScreenButton/ScreenButton";
+import { setCurrentGame } from "../../redux/game/gameSlice";
 
 export default function Results() {
+  const dispatch = useDispatch();
   const teams = useSelector(getTeams);
   const winScore = useSelector(getWinScore);
   const cuurrentTeam = useSelector(getCurrentTeam);
@@ -19,20 +21,17 @@ export default function Results() {
 
   useEffect(() => {
     const hasWinner = teams.some((team) => team.score >= winScore);
-    console.log("hasWinner", hasWinner);
-
     setWinner(hasWinner);
   }, [teams, winScore]);
 
   useEffect(() => {
-    console.log(cuurrentTeam, teams.length - 1);
     if (winner && cuurrentTeam === 0) {
       setFinished(true);
     }
   }, [winner, cuurrentTeam, teams]);
 
   useEffect(() => {
-    finished && setScreen("winner");
+    finished && setScreen("winner") && dispatch(setCurrentGame(false));
   }, [finished, setScreen]);
 
   return (

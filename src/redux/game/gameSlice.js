@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   currentTeam: 0,
+  currentGame: false,
   time: 90,
   playing: false,
   timeIsUp: true,
@@ -46,6 +47,9 @@ const gameSlice = createSlice({
     saveSettings(state, action) {
       return { ...state, ...action.payload };
     },
+    setCurrentGame(state, action) {
+      state.currentGame = action.payload;
+    },
   },
 });
 
@@ -60,4 +64,5 @@ export const {
   switchScreen,
   newGame,
   saveSettings,
+  setCurrentGame,
 } = gameSlice.actions;

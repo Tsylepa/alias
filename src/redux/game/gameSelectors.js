@@ -1,5 +1,3 @@
-export const getCurrentWord = (state) => state.game.currentWord;
-
 export const getTime = (state) => state.game.time;
 
 export const getWinScore = (state) => state.game.winScore;
@@ -17,3 +15,5 @@ export const getScreen = (state) => state.game.screen;
 export const getTeams = (state) => state.game.teams;
 
 export const getCurrentTeam = (state) => state.game.currentTeam;
+
+export const getCurrentGame = (state) => state.game.currentGame;
