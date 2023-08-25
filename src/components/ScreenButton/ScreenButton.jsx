@@ -6,7 +6,7 @@ export default function ScreenButton({ screen, text, onClick }) {
 
   function handleClick() {
     setScreen(screen);
-    onClick();
+    onClick && onClick();
   }
 
   return (
