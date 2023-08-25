@@ -5,14 +5,16 @@ import { updateIsPlaying } from "src/redux/game/gameSlice";
 import { getTimeIsUp } from "src/redux/game/gameSelectors";
 import { useDispatch, useSelector } from "react-redux";
 import { getWordsCollection } from "src/redux/game/gameSelectors";
-import { switchScreen, updateWordsCollection } from "src/redux/game/gameSlice";
+import { updateWordsCollection } from "src/redux/game/gameSlice";
 import { updateRoundResults } from "src/redux/game/gameSlice";
+import useScreen from "src/hooks/useScreen";
 
 const Game = () => {
   const dispatch = useDispatch();
   const timeIsUp = useSelector(getTimeIsUp);
   const wordsCollection = useSelector(getWordsCollection);
   const [results, setResults] = useState([]);
+  const [, setScreen] = useScreen();
 
   function handleNextWord(guessed) {
     const updatedCollection = [...wordsCollection];
@@ -26,7 +28,7 @@ const Game = () => {
     if (timeIsUp) {
       dispatch(updateIsPlaying(false));
       dispatch(updateRoundResults(results));
-      dispatch(switchScreen("round"));
+      setScreen("round");
     }
   }
 
