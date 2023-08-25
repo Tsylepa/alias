@@ -1,9 +1,12 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getRoundResults } from "src/redux/game/gameSelectors";
-import { updateTeams } from "src/redux/game/gameSlice";
-import { getCurrentTeam, getTeams } from "src/redux/game/gameSelectors";
-import { switchScreen, updateCurrentTeam } from "../../redux/game/gameSlice";
+import {
+  getRoundResults,
+  getCurrentTeam,
+  getTeams,
+} from "src/redux/game/gameSelectors";
+import { updateTeams, updateCurrentTeam } from "src/redux/game/gameSlice";
+import ScreenButton from "src/components/ScreenButton";
 
 export default function Round() {
   const dispatch = useDispatch();
@@ -24,14 +27,11 @@ export default function Round() {
         )
       )
     );
-  }, [dispatch]);
 
-  function handleContinue() {
     dispatch(
       updateCurrentTeam(currentTeam === teams.length - 1 ? 0 : currentTeam + 1)
     );
-    dispatch(switchScreen("results"));
-  }
+  }, [dispatch]);
 
   return (
     <>
@@ -44,9 +44,7 @@ export default function Round() {
       ))}
       <p>Score:</p>
       <p>{score}</p>
-      <button type="button" onClick={handleContinue}>
-        Continue
-      </button>
+      <ScreenButton screen="results" text="Continue" />
     </>
   );
 }
