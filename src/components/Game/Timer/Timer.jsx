@@ -1,11 +1,13 @@
 import { useState, useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { updateIsPlaying, updateTimeIsUp } from "src/redux/game/gameSlice";
+import { getTime } from "src/redux/game/gameSelectors";
 
 const Timer = () => {
   const dispatch = useDispatch();
+  const time = useSelector(getTime);
 
-  const [countdown, setCountdown] = useState(5);
+  const [countdown, setCountdown] = useState(time);
 
   useEffect(() => {
     dispatch(updateTimeIsUp(false));
