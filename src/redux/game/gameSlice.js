@@ -1,7 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  currentWord: 0,
   currentTeam: 0,
   time: 90,
   playing: false,
@@ -30,9 +29,6 @@ const gameSlice = createSlice({
     updateTimeIsUp(state, action) {
       state.timeIsUp = action.payload;
     },
-    updateCurrentWord(state, action) {
-      state.currentWord = action.payload;
-    },
     updateWordsCollection(state, action) {
       state.wordsCollection = action.payload;
     },
@@ -41,6 +37,14 @@ const gameSlice = createSlice({
     },
     switchScreen(state, action) {
       state.screen = action.payload;
+    },
+    newGame(state) {
+      state.teams = initialState.teams;
+      state.wordsCollection = initialState.wordsCollection;
+      state.currentTeam = initialState.currentTeam;
+    },
+    saveSettings(state, action) {
+      return { ...state, ...action.payload };
     },
   },
 });
@@ -51,8 +55,9 @@ export const {
   updateTeams,
   updateCurrentTeam,
   updateTimeIsUp,
-  updateCurrentWord,
   updateWordsCollection,
   updateRoundResults,
   switchScreen,
+  newGame,
+  saveSettings,
 } = gameSlice.actions;
