@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getTeams } from "src/redux/game/gameSelectors";
 import { updateTeams } from "src/redux/game/gameSlice";
-import { switchScreen } from "../../redux/game/gameSlice";
+import ScreenButton from "src/components/ScreenButton";
 
 export default function Teams() {
   const dispatch = useDispatch();
@@ -51,9 +51,7 @@ export default function Teams() {
         </tbody>
       </table>
       <button onClick={addTeam}>+</button>
-      <button type="button" onClick={() => dispatch(switchScreen("game"))}>
-        Continue
-      </button>
+      <ScreenButton screen="getReady" text="Continue" />
     </>
   );
 }
