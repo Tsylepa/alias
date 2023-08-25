@@ -1,4 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
+import css from "./Results.module.css";
 import {
   getTeams,
   getWinScore,
@@ -37,7 +38,7 @@ export default function Results() {
   return (
     <>
       <h2>Results</h2>
-      <table>
+      <table className={css.table}>
         <tbody>
           {teams.map((t) => (
             <tr key={t.id}>

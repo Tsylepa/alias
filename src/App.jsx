@@ -1,6 +1,6 @@
 // App.js
 import { useEffect } from "react";
-import "./App.css";
+import css from "./App.module.css";
 import _ from "lodash";
 import words from "./words.json";
 import Game from "./components/Game";
@@ -23,8 +23,9 @@ const App = () => {
   useEffect(() => {
     dispatch(updateWordsCollection(shuffledWords));
   }, [dispatch, shuffledWords]);
+
   return (
-    <>
+    <div className={css.app}>
       <button onClick={() => setScreen("menu")}>Screen</button>
       {screen === "game" && <Game />}
       {screen === "results" && <Results />}
@@ -34,7 +35,7 @@ const App = () => {
       {screen === "settings" && <Settings />}
       {screen === "getReady" && <GetReady />}
       {screen === "winner" && <Winner />}
-    </>
+    </div>
   );
 };
 

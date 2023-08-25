@@ -1,0 +1,23 @@
+.table {
+  width: 300px;
+}
+
+.left {
+  text-align: left;
+}
+
+.icon {
+  cursor: pointer;
+}
+
+.tfoot {
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+
+.score {
+  width: 70px;
+  border-radius: 6px;
+  color: var(--secondary-color);
+  background-color: var(--primary-color);
+}
