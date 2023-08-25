@@ -1,14 +1,39 @@
-import { useDispatch, useSelector } from "react-redux";
-import { getTeams } from "src/redux/game/gameSelectors";
-import { switchScreen } from "../../redux/game/gameSlice";
+import { useSelector } from "react-redux";
+import {
+  getTeams,
+  getWinScore,
+  getCurrentTeam,
+} from "src/redux/game/gameSelectors";
+import useScreen from "src/hooks/useScreen";
+import { useEffect, useState } from "react";
+import ScreenButton from "../ScreenButton/ScreenButton";
 
 export default function Results() {
-  const dispatch = useDispatch();
   const teams = useSelector(getTeams);
+  const winScore = useSelector(getWinScore);
+  const cuurrentTeam = useSelector(getCurrentTeam);
 
-  function handleStart() {
-    dispatch(switchScreen("game"));
-  }
+  const [, setScreen] = useScreen();
+  const [winner, setWinner] = useState(false);
+  const [finished, setFinished] = useState(false);
+
+  useEffect(() => {
+    const hasWinner = teams.some((team) => team.score >= winScore);
+    console.log("hasWinner", hasWinner);
+
+    setWinner(hasWinner);
+  }, [teams, winScore]);
+
+  useEffect(() => {
+    console.log(cuurrentTeam, teams.length - 1);
+    if (winner && cuurrentTeam === 0) {
+      setFinished(true);
+    }
+  }, [winner, cuurrentTeam, teams]);
+
+  useEffect(() => {
+    finished && setScreen("winner");
+  }, [finished, setScreen]);
 
   return (
     <>
@@ -23,9 +48,7 @@ export default function Results() {
           ))}
         </tbody>
       </table>
-      <button type="button" onClick={handleStart}>
-        Start
-      </button>
+      <ScreenButton screen="getReady" text="Continue" />
     </>
   );
 }
