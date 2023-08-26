@@ -48,7 +48,7 @@ export default function Results() {
           ))}
         </tbody>
       </table>
-      <ScreenButton screen="getReady" text="Continue" />
+      <ScreenButton screen="getReady">Continue</ScreenButton>
     </>
   );
 }

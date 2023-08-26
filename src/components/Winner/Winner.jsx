@@ -18,7 +18,7 @@ export default function Winner() {
     <>
       <h2>Congratulations!</h2>
       <h2>{winner.name}</h2>
-      <ScreenButton screen="menu" text="Menu" />
+      <ScreenButton screen="menu">Menu</ScreenButton>
     </>
   );
 }

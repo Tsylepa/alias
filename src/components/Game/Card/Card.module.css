@@ -1,0 +1,15 @@
+.card {
+  width: 200px;
+  height: 200px;
+  color: var(--btn-bg-color);
+  background-color: var(--btn-color);
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.word {
+  font-weight: 700;
+  font-size: 2rem;
+}

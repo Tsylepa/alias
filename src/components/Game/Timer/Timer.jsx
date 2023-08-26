@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { updateIsPlaying, updateTimeIsUp } from "src/redux/game/gameSlice";
 import { getTime } from "src/redux/game/gameSelectors";
+import { LuTimer } from "react-icons/lu";
 
 const Timer = () => {
   const dispatch = useDispatch();
@@ -29,7 +30,8 @@ const Timer = () => {
 
   return (
     <div>
-      <p>{countdown}</p>
+      <LuTimer />
+      <p>{countdown}"</p>
     </div>
   );
 };

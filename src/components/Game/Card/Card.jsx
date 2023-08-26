@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { getWordsCollection } from "src/redux/game/gameSelectors";
+import css from "./Card.module.css";
 
 const Card = () => {
   const wordsCollection = useSelector(getWordsCollection);
@@ -8,9 +9,9 @@ const Card = () => {
   useEffect(() => {}, []);
 
   return (
-    <>
-      <p>{wordsCollection[0]}</p>
-    </>
+    <div className={css.card}>
+      <p className={css.word}>{wordsCollection[0]}</p>
+    </div>
   );
 };
 

@@ -18,7 +18,7 @@ import useScreen from "./hooks/useScreen";
 const App = () => {
   const dispatch = useDispatch();
   const shuffledWords = _.shuffle(words);
-  const [screen, setScreen] = useScreen();
+  const [screen] = useScreen();
 
   useEffect(() => {
     dispatch(updateWordsCollection(shuffledWords));
@@ -26,7 +26,7 @@ const App = () => {
 
   return (
     <div className={css.app}>
-      <button onClick={() => setScreen("menu")}>Screen</button>
+      {/* <button onClick={() => setScreen("menu")}>Screen</button> */}
       {screen === "game" && <Game />}
       {screen === "results" && <Results />}
       {screen === "round" && <Round />}

@@ -1,7 +1,7 @@
 import useScreen from "../../hooks/useScreen";
 import PropTypes from "prop-types";
 
-export default function ScreenButton({ screen, text, onClick }) {
+export default function ScreenButton({ screen, onClick, children, ...props }) {
   const [, setScreen] = useScreen();
 
   function handleClick() {
@@ -10,14 +10,13 @@ export default function ScreenButton({ screen, text, onClick }) {
   }
 
   return (
-    <button type="button" onClick={handleClick}>
-      {text}
+    <button type="button" onClick={handleClick} {...props}>
+      {children}
     </button>
   );
 }
 
 ScreenButton.propTypes = {
   screen: PropTypes.string.isRequired,
-  text: PropTypes.string.isRequired,
   onClick: PropTypes.func,
 };

@@ -78,7 +78,9 @@ export default function Round() {
         </tfoot>
       </table>
 
-      <ScreenButton screen="results" text="Continue" onClick={handleContinue} />
+      <ScreenButton screen="results" onClick={handleContinue}>
+        Continue
+      </ScreenButton>
     </>
   );
 }

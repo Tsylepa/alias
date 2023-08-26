@@ -1,0 +1,19 @@
+.back {
+  align-self: flex-start;
+}
+
+.screen {
+  width: 100%;
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.start {
+  justify-content: center;
+  align-self: center;
+  padding: 1.4rem;
+  font-size: 1.6rem;
+  width: 70%;
+}

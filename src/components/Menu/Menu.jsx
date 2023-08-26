@@ -13,9 +13,13 @@ export default function Menu() {
 
   return (
     <>
-      {currentGame && <ScreenButton screen="results" text="Continue game" />}
+      {currentGame && (
+        <ScreenButton screen="results">Continue game</ScreenButton>
+      )}
 
-      <ScreenButton screen="settings" text="New Game" onClick={handleNewGame} />
+      <ScreenButton screen="settings" onClick={handleNewGame}>
+        New game
+      </ScreenButton>
     </>
   );
 }

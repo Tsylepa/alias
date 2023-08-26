@@ -1,0 +1,20 @@
+.back {
+  align-self: flex-start;
+}
+
+.input,
+.input:active {
+  font-size: 1rem;
+  outline: none;
+  color: var(--primary-color);
+  border-color: transparent;
+  background-color: transparent;
+}
+
+.delete {
+  cursor: pointer;
+}
+
+.continue {
+  margin-top: auto;
+}

@@ -2,7 +2,10 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getTeams } from "src/redux/game/gameSelectors";
 import { updateTeams } from "src/redux/game/gameSlice";
+import { FaTrashAlt } from "react-icons/fa";
+import { IoIosArrowBack } from "react-icons/io";
 import ScreenButton from "src/components/ScreenButton";
+import css from "./Teams.module.css";
 
 export default function Teams() {
   const dispatch = useDispatch();
@@ -31,8 +34,17 @@ export default function Teams() {
     dispatch(updateTeams(updatedTeams));
   }
 
+  function deleteTeam(id) {
+    const updatedTeams = teamsList.filter((team) => team.id !== id);
+    setTeamsList(updatedTeams);
+  }
+
   return (
     <>
+      <ScreenButton screen="menu" className={css.back}>
+        <IoIosArrowBack />
+        Back
+      </ScreenButton>
       <h2>Teams</h2>
       <table>
         <tbody>
@@ -42,16 +54,22 @@ export default function Teams() {
                 <input
                   type="text"
                   value={t.name}
+                  className={css.input}
                   onChange={(e) => changeName(e, t.id)}
                 />
+                <FaTrashAlt
+                  onClick={() => deleteTeam(t.id)}
+                  className={css.delete}
+                />
               </td>
-              {/* <td>{t.score}</td> */}
             </tr>
           ))}
         </tbody>
       </table>
-      <button onClick={addTeam}>+</button>
-      <ScreenButton screen="getReady" text="Continue" />
+      <button onClick={addTeam}>+ Add team</button>
+      <ScreenButton screen="getReady" className={css.continue}>
+        Continue
+      </ScreenButton>
     </>
   );
 }

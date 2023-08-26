@@ -1,44 +1,50 @@
+import { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  updateIsPlaying,
+  updateWordsCollection,
+  updateRoundResults,
+  setCurrentGame,
+} from "src/redux/game/gameSlice";
+import { getTimeIsUp, getWordsCollection } from "src/redux/game/gameSelectors";
+import useScreen from "src/hooks/useScreen";
 import Timer from "./Timer";
 import Card from "./Card";
-import { useEffect, useState } from "react";
-import { updateIsPlaying } from "src/redux/game/gameSlice";
-import { getTimeIsUp } from "src/redux/game/gameSelectors";
-import { useDispatch, useSelector } from "react-redux";
-import { getWordsCollection } from "src/redux/game/gameSelectors";
-import { updateWordsCollection } from "src/redux/game/gameSlice";
-import { updateRoundResults } from "src/redux/game/gameSlice";
-import useScreen from "src/hooks/useScreen";
-import { setCurrentGame } from "src/redux/game/gameSlice";
+import css from "./Game.module.css";
 
 const Game = () => {
   const dispatch = useDispatch();
   const timeIsUp = useSelector(getTimeIsUp);
   const wordsCollection = useSelector(getWordsCollection);
   const [results, setResults] = useState([]);
+  const [finish, setFinish] = useState(false);
   const [, setScreen] = useScreen();
 
   useEffect(() => {
     dispatch(setCurrentGame(true));
   }, []);
 
-  function handleNextWord(guessed) {
-    const updatedCollection = [...wordsCollection];
-
-    console.log(results);
-    updatedCollection.shift();
-    setResults([...results, { word: wordsCollection[0], guessed }]);
-
-    dispatch(updateWordsCollection(updatedCollection));
-
-    if (timeIsUp) {
+  useEffect(() => {
+    if (finish) {
       dispatch(updateIsPlaying(false));
       dispatch(updateRoundResults(results));
       setScreen("round");
     }
+  }, [results, finish]);
+
+  function handleNextWord(guessed) {
+    const updatedCollection = [...wordsCollection];
+    updatedCollection.shift();
+    const newResult = { word: wordsCollection[0], guessed };
+    setResults((prevResults) => [...prevResults, newResult]);
+    dispatch(updateWordsCollection(updatedCollection));
+    if (timeIsUp) {
+      setFinish(true);
+    }
   }
 
   return (
-    <>
+    <div className={css.screen}>
       <Timer />
       <button type="button" onClick={() => handleNextWord(false)}>
         Dismiss
@@ -47,7 +53,7 @@ const Game = () => {
       <button type="button" onClick={() => handleNextWord(true)}>
         Guessed
       </button>
-    </>
+    </div>
   );
 };
 
