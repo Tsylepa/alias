@@ -12,6 +12,7 @@ const initialState = {
     { id: 1, name: "Team One", score: 0 },
     { id: 2, name: "Team Two", score: 0 },
   ],
+  modal: false,
 };
 
 const gameSlice = createSlice({
@@ -50,6 +51,9 @@ const gameSlice = createSlice({
     setCurrentGame(state, action) {
       state.currentGame = action.payload;
     },
+    showModal(state, action) {
+      state.modal = action.payload;
+    },
   },
 });
 
@@ -65,4 +69,5 @@ export const {
   newGame,
   saveSettings,
   setCurrentGame,
+  showModal,
 } = gameSlice.actions;
