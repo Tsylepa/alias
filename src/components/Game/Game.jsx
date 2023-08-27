@@ -35,9 +35,11 @@ const Game = () => {
   function handleNextWord(guessed) {
     const updatedCollection = [...wordsCollection];
     updatedCollection.shift();
+
     const newResult = { word: wordsCollection[0], guessed };
     setResults((prevResults) => [...prevResults, newResult]);
     dispatch(updateWordsCollection(updatedCollection));
+
     if (timeIsUp) {
       setFinish(true);
     }
@@ -46,12 +48,15 @@ const Game = () => {
   return (
     <div className={css.screen}>
       <Timer />
-      <button type="button" onClick={() => handleNextWord(false)}>
-        Dismiss
-      </button>
-      <Card />
+
       <button type="button" onClick={() => handleNextWord(true)}>
         Guessed
+      </button>
+
+      <Card />
+
+      <button type="button" onClick={() => handleNextWord(false)}>
+        Dismiss
       </button>
     </div>
   );
