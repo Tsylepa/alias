@@ -19,4 +19,5 @@ export default function ScreenButton({ screen, onClick, children, ...props }) {
 ScreenButton.propTypes = {
   screen: PropTypes.string.isRequired,
   onClick: PropTypes.func,
+  children: PropTypes.node.isRequired,
 };
