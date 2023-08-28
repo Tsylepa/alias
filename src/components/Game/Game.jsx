@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   updateIsPlaying,
@@ -11,14 +11,18 @@ import useScreen from "src/hooks/useScreen";
 import Timer from "./Timer";
 import Card from "./Card";
 import css from "./Game.module.css";
+import Draggable from "react-draggable";
 
 const Game = () => {
   const dispatch = useDispatch();
   const timeIsUp = useSelector(getTimeIsUp);
+  const nodeRef = useRef(null);
   const wordsCollection = useSelector(getWordsCollection);
   const [results, setResults] = useState([]);
   const [finish, setFinish] = useState(false);
   const [, setScreen] = useScreen();
+  const [position, setPosition] = useState({ x: 0, y: 0 });
+  const [dragging, setDragging] = useState(false);
 
   useEffect(() => {
     dispatch(setCurrentGame(true));
@@ -33,6 +37,9 @@ const Game = () => {
   }, [results, finish]);
 
   function handleNextWord(guessed) {
+    setDragging(false);
+    resetPosition();
+
     const updatedCollection = [...wordsCollection];
     updatedCollection.shift();
 
@@ -45,6 +52,27 @@ const Game = () => {
     }
   }
 
+  const handleDrag = (_, data) => {
+    if (!dragging) return;
+    setPosition({ x: 0, y: data.y });
+
+    if (data.y > 150) {
+      handleNextWord(false);
+    }
+
+    if (data.y < -150) {
+      handleNextWord(true);
+    }
+  };
+
+  function handleStop() {
+    resetPosition();
+  }
+
+  const resetPosition = () => {
+    setPosition({ x: 0, y: 0 });
+  };
+
   return (
     <div className={css.screen}>
       <Timer />
@@ -53,7 +81,20 @@ const Game = () => {
         Guessed
       </button>
 
-      <Card />
+      <Draggable
+        axis="y"
+        defaultPosition={{ x: 0, y: 0 }}
+        position={position}
+        grid={[1, 1]}
+        scale={1}
+        onStart={() => setDragging(true)}
+        onStop={handleStop}
+        onDrag={handleDrag}
+        nodeRef={nodeRef}>
+        <div ref={nodeRef}>
+          <Card />
+        </div>
+      </Draggable>
 
       <button type="button" onClick={() => handleNextWord(false)}>
         Dismiss
