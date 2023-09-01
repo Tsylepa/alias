@@ -13,6 +13,7 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   getCategory,
+  getCurrentGame,
   getLanguage,
   getWordsCollection,
 } from "./redux/game/gameSelectors";
@@ -25,13 +26,14 @@ const App = () => {
   const words = useSelector(getWordsCollection);
   const language = useSelector(getLanguage);
   const category = useSelector(getCategory);
+  const currentGame = useSelector(getCurrentGame);
 
   useEffect(() => {
     setScreen("menu");
   }, []);
 
   useEffect(() => {
-    if (words.length < 5) {
+    if (currentGame && words.length < 5) {
       dispatch(updateWordsCollection(getWords(language, category)));
     }
   }, [words]);
