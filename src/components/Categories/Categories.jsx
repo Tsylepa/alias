@@ -4,8 +4,8 @@ import getWords from "src/utils/getWords";
 import { updateWordsCollection } from "src/redux/game/gameSlice";
 import { getLanguage } from "src/redux/game/gameSelectors";
 import translation from "src/utils/translation";
-import css from "./Categories.module.css";
 import ScreenButton from "../ScreenButton/ScreenButton";
+import { updateCategory } from "../../redux/game/gameSlice";
 
 export default function Categories() {
   const dispatch = useDispatch();
@@ -17,6 +17,7 @@ export default function Categories() {
     const words = getWords(language, category);
     setScreen("settings");
     dispatch(updateWordsCollection(words));
+    dispatch(updateCategory(category));
   }
 
   return (

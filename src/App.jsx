@@ -10,13 +10,31 @@ import Results from "./components/Results";
 import Winner from "./components/Winner";
 import useScreen from "./hooks/useScreen";
 import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  getCategory,
+  getLanguage,
+  getWordsCollection,
+} from "./redux/game/gameSelectors";
+import { updateWordsCollection } from "./redux/game/gameSlice";
+import getWords from "./utils/getWords";
 
 const App = () => {
+  const dispatch = useDispatch();
   const [screen, setScreen] = useScreen();
+  const words = useSelector(getWordsCollection);
+  const language = useSelector(getLanguage);
+  const category = useSelector(getCategory);
 
   useEffect(() => {
     setScreen("menu");
   }, []);
+
+  useEffect(() => {
+    if (words.length < 5) {
+      dispatch(updateWordsCollection(getWords(language, category)));
+    }
+  }, [words]);
 
   return (
     <div className={css.app}>
