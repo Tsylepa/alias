@@ -3,13 +3,14 @@ import { useDispatch, useSelector } from "react-redux";
 import { getTeams } from "src/redux/game/gameSelectors";
 import { updateTeams } from "src/redux/game/gameSlice";
 import { FaTrashAlt } from "react-icons/fa";
-import { IoIosArrowBack } from "react-icons/io";
 import ScreenButton from "src/components/ScreenButton";
 import css from "./Teams.module.css";
+import translation from "src/utils/translation";
 
 export default function Teams() {
   const dispatch = useDispatch();
   const teams = useSelector(getTeams);
+  const text = translation();
 
   const [teamsList, setTeamsList] = useState(teams);
 
@@ -41,11 +42,10 @@ export default function Teams() {
 
   return (
     <>
-      <ScreenButton screen="menu" className={css.back}>
-        <IoIosArrowBack />
-        Back
+      <ScreenButton screen="menu" back>
+        {text.back}
       </ScreenButton>
-      <h2>Teams</h2>
+      <h2>{text.teams}</h2>
       <table>
         <tbody>
           {teamsList.map((t) => (
@@ -66,9 +66,9 @@ export default function Teams() {
           ))}
         </tbody>
       </table>
-      <button onClick={addTeam}>+ Add team</button>
-      <ScreenButton screen="getReady" className={css.continue}>
-        Continue
+      <button onClick={addTeam}>+ {text.addTeam}</button>
+      <ScreenButton screen="categories" className={css.continue}>
+        {text.continue}
       </ScreenButton>
     </>
   );

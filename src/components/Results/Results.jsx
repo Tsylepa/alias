@@ -7,14 +7,16 @@ import {
 } from "src/redux/game/gameSelectors";
 import useScreen from "src/hooks/useScreen";
 import { useEffect, useState } from "react";
-import ScreenButton from "../ScreenButton/ScreenButton";
-import { setCurrentGame } from "../../redux/game/gameSlice";
+import ScreenButton from "src/components/ScreenButton";
+import { setCurrentGame } from "src/redux/game/gameSlice";
+import translation from "src/utils/translation";
 
 export default function Results() {
   const dispatch = useDispatch();
   const teams = useSelector(getTeams);
   const winScore = useSelector(getWinScore);
   const cuurrentTeam = useSelector(getCurrentTeam);
+  const text = translation();
 
   const [, setScreen] = useScreen();
   const [winner, setWinner] = useState(false);
@@ -37,7 +39,7 @@ export default function Results() {
 
   return (
     <>
-      <h2>Results</h2>
+      <h2>{text.results}</h2>
       <table className={css.table}>
         <tbody>
           {teams.map((t) => (
@@ -48,7 +50,7 @@ export default function Results() {
           ))}
         </tbody>
       </table>
-      <ScreenButton screen="getReady">Continue</ScreenButton>
+      <ScreenButton screen="getReady">{text.continue}</ScreenButton>
     </>
   );
 }

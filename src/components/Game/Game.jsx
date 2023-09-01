@@ -12,6 +12,7 @@ import Timer from "./Timer";
 import Card from "./Card";
 import css from "./Game.module.css";
 import Draggable from "react-draggable";
+import translation from "src/utils/translation";
 
 const Game = () => {
   const dispatch = useDispatch();
@@ -23,6 +24,8 @@ const Game = () => {
   const [, setScreen] = useScreen();
   const [position, setPosition] = useState({ x: 0, y: 0 });
   const [dragging, setDragging] = useState(false);
+  const [disabled, setDisabled] = useState(false);
+  const text = translation();
 
   useEffect(() => {
     dispatch(setCurrentGame(true));
@@ -38,6 +41,8 @@ const Game = () => {
 
   function handleNextWord(guessed) {
     setDragging(false);
+    setDisabled(true);
+
     resetPosition();
 
     const updatedCollection = [...wordsCollection];
@@ -53,6 +58,11 @@ const Game = () => {
   }
 
   const handleDrag = (_, data) => {
+    if (disabled) {
+      setPosition({ x: 0, y: 0 });
+      return;
+    }
+
     if (!dragging) return;
     setPosition({ x: 0, y: data.y });
 
@@ -64,9 +74,14 @@ const Game = () => {
       handleNextWord(true);
     }
   };
+  function handleStart() {
+    setDragging(true);
+    setDisabled(false);
+  }
 
   function handleStop() {
     resetPosition();
+    setDisabled(false);
   }
 
   const resetPosition = () => {
@@ -78,7 +93,7 @@ const Game = () => {
       <Timer />
 
       <button type="button" onClick={() => handleNextWord(true)}>
-        Guessed
+        {text.guessed}
       </button>
 
       <Draggable
@@ -87,7 +102,8 @@ const Game = () => {
         position={position}
         grid={[1, 1]}
         scale={1}
-        onStart={() => setDragging(true)}
+        disabled={disabled}
+        onStart={handleStart}
         onStop={handleStop}
         onDrag={handleDrag}
         nodeRef={nodeRef}>
@@ -97,7 +113,7 @@ const Game = () => {
       </Draggable>
 
       <button type="button" onClick={() => handleNextWord(false)}>
-        Dismiss
+        {text.dismiss}
       </button>
     </div>
   );

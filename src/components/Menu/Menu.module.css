@@ -1,0 +1,7 @@
+.buttonsSet {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-self: center;
+  margin: auto 0;
+}

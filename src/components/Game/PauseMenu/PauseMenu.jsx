@@ -1,9 +1,11 @@
 import { useDispatch } from "react-redux";
 import { showModal } from "src/redux/game/gameSlice";
 import ScreenButton from "src/components/ScreenButton";
+import translation from "src/utils/translation";
 
 export default function PauseMenu() {
   const dispatch = useDispatch();
+  const text = translation();
 
   function closeModal() {
     dispatch(showModal(false));
@@ -12,9 +14,9 @@ export default function PauseMenu() {
   return (
     <>
       <button type="button" onClick={closeModal}>
-        Resume
+        {text.resume}
       </button>
-      <ScreenButton screen="menu">Quit game</ScreenButton>
+      <ScreenButton screen="menu">{text.quit}</ScreenButton>
     </>
   );
 }

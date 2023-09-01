@@ -1,0 +1,68 @@
+import { useSelector } from "react-redux";
+import { getLanguage } from "src/redux/game/gameSelectors";
+
+const text = {
+  en: {
+    back: "Back",
+    continue: "Continue",
+    continueGame: "Continue game",
+    newGame: "New game",
+    teams: "Teams",
+    addTeam: "Add team",
+    easy: "Easy",
+    medium: "Medium",
+    hard: "Mindblowing",
+    settings: "Settings",
+    roundTime: "Round time",
+    seconds: "seconds",
+    wordsToWin: "Words to win",
+    words: "words",
+    ready: "Are you ready?",
+    start: "Start",
+    guessed: "Guessed",
+    dismiss: "Dismiss",
+    roundResults: "Round results",
+    score: "Score",
+    results: "Results",
+    congratulations: "Congratulations",
+    menu: "Menu",
+    paused: "Paused",
+    resume: "Resume",
+    quit: "Quit game",
+  },
+  ua: {
+    continueGame: "Продовжити гру",
+    newGame: "Нова гра",
+    back: "Назад",
+    continue: "Продовжити",
+    continueGame: "Продовжити гру",
+    newGame: "Нова гра",
+    teams: "Команди",
+    addTeam: "Додати команду",
+    easy: "Легкі слова",
+    medium: "Середні слова",
+    hard: "Мозковий штурм",
+    settings: "Налаштування",
+    roundTime: "Час раунду",
+    seconds: "секунд",
+    wordsToWin: "Слів для виграшу",
+    words: "слів",
+    ready: "Ви готові?",
+    start: "Погнали",
+    guessed: "Відгадали",
+    dismiss: "Пропустити",
+    roundResults: "Результати раунду",
+    score: "Бали",
+    results: "Результат",
+    congratulations: "Вітаємо",
+    menu: "Меню",
+    paused: "Павза",
+    resume: "Продовжити",
+    quit: "Вийти з гри",
+  },
+};
+
+export default function translation() {
+  const language = useSelector(getLanguage);
+  return text[language];
+}

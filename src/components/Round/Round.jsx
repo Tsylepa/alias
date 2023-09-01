@@ -9,12 +9,14 @@ import { updateTeams, updateCurrentTeam } from "src/redux/game/gameSlice";
 import css from "./Round.module.css";
 import ScreenButton from "src/components/ScreenButton";
 import { BiSolidLike, BiLike } from "react-icons/bi";
+import translation from "src/utils/translation";
 
 export default function Round() {
   const dispatch = useDispatch();
   const currentTeam = useSelector(getCurrentTeam);
   const teams = useSelector(getTeams);
   const roundResults = useSelector(getRoundResults);
+  const text = translation();
 
   const [words, setWords] = useState(roundResults);
 
@@ -52,7 +54,7 @@ export default function Round() {
 
   return (
     <>
-      <h2>Round results</h2>
+      <h2>{text.roundResults}</h2>
       <h3>{teams[currentTeam].name}</h3>
       <table className={css.table}>
         <tbody>
@@ -69,7 +71,7 @@ export default function Round() {
         </tbody>
         <tfoot className={css.tfoot}>
           <tr>
-            <td className={css.left}>Score:</td>
+            <td className={css.left}>{text.score}:</td>
             <td className={css.score}>
               {score > 0 && "+"}
               {score}
@@ -79,7 +81,7 @@ export default function Round() {
       </table>
 
       <ScreenButton screen="results" onClick={handleContinue}>
-        Continue
+        {text.continue}
       </ScreenButton>
     </>
   );

@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { saveSettings } from "src/redux/game/gameSlice";
-import { IoIosArrowBack } from "react-icons/io";
 import ScreenButton from "src/components/ScreenButton";
 import css from "./Settings.module.css";
+import translation from "src/utils/translation";
 
 const initial = {
   time: 60,
@@ -20,6 +20,7 @@ const rangeDefaults = {
 export default function Settings() {
   const dispatch = useDispatch();
   const [settings, setSettings] = useState(initial);
+  const text = translation();
 
   function handleRange(t, property) {
     const min = t.min;
@@ -38,16 +39,17 @@ export default function Settings() {
 
   return (
     <>
-      <ScreenButton screen="menu" className={css.back}>
-        <IoIosArrowBack />
-        Back
+      <ScreenButton screen="menu" back>
+        {text.back}
       </ScreenButton>
-      <h2>Settings</h2>
+      <h2>{text.settings}</h2>
       <div className={css.settings}>
         <div>
           <div className={css.title}>
-            <label htmlFor="time">Round time</label>
-            <p>{settings.time} seconds</p>
+            <label htmlFor="time">{text.roundTime}</label>
+            <p>
+              {settings.time} {text.seconds}
+            </p>
           </div>
           <input
             name="time"
@@ -68,8 +70,10 @@ export default function Settings() {
         </div>
         <div>
           <div className={css.title}>
-            <label htmlFor="score">Words to win</label>
-            <p>{settings.winScore} words</p>
+            <label htmlFor="score">{text.wordsToWin}</label>
+            <p>
+              {settings.winScore} {text.words}
+            </p>
           </div>
           <input
             name="score"
@@ -91,9 +95,9 @@ export default function Settings() {
       </div>
       <ScreenButton
         className={css.continue}
-        screen="teams"
+        screen="getReady"
         onClick={handleContinue}>
-        Continue
+        {text.continue}
       </ScreenButton>
     </>
   );

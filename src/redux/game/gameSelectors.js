@@ -19,3 +19,7 @@ export const getCurrentTeam = (state) => state.game.currentTeam;
 export const getCurrentGame = (state) => state.game.currentGame;
 
 export const getModal = (state) => state.game.modal;
+
+export const getCategory = (state) => state.game.category;
+
+export const getLanguage = (state) => state.game.language;

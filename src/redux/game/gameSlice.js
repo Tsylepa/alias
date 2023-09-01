@@ -8,6 +8,8 @@ const initialState = {
   timeIsUp: true,
   wordsCollection: [],
   screen: "menu",
+  language: "en",
+  currentGame: null,
   teams: [
     { id: 1, name: "Team One", score: 0 },
     { id: 2, name: "Team Two", score: 0 },
@@ -44,6 +46,7 @@ const gameSlice = createSlice({
       state.teams = initialState.teams;
       state.wordsCollection = initialState.wordsCollection;
       state.currentTeam = initialState.currentTeam;
+      state.currentGame = initialState.currentGame;
     },
     saveSettings(state, action) {
       return { ...state, ...action.payload };
@@ -53,6 +56,12 @@ const gameSlice = createSlice({
     },
     showModal(state, action) {
       state.modal = action.payload;
+    },
+    updateCategory(state, action) {
+      state.category = action.payload;
+    },
+    updateLanguage(state, action) {
+      state.language = action.payload;
     },
   },
 });
@@ -65,6 +74,8 @@ export const {
   updateTimeIsUp,
   updateWordsCollection,
   updateRoundResults,
+  updateCategory,
+  updateLanguage,
   switchScreen,
   newGame,
   saveSettings,

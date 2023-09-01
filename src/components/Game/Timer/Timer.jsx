@@ -12,11 +12,13 @@ import PauseMenu from "../PauseMenu";
 import Modal from "src/components/Modal";
 import { BsPauseCircleFill } from "react-icons/bs";
 import css from "./Timer.module.css";
+import translation from "src/utils/translation";
 
 const Timer = () => {
   const dispatch = useDispatch();
   const time = useSelector(getTime);
   const paused = useSelector(getModal);
+  const text = translation();
 
   const [countdown, setCountdown] = useState(time);
 
@@ -58,7 +60,7 @@ const Timer = () => {
       </div>
 
       {paused && (
-        <Modal title="Paused">
+        <Modal title={text.paused}>
           <PauseMenu />
         </Modal>
       )}

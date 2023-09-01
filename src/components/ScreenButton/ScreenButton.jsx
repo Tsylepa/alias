@@ -1,7 +1,13 @@
-import useScreen from "../../hooks/useScreen";
+import useScreen from "src/hooks/useScreen";
 import PropTypes from "prop-types";
-
-export default function ScreenButton({ screen, onClick, children, ...props }) {
+import { IoIosArrowBack } from "react-icons/io";
+export default function ScreenButton({
+  screen,
+  onClick,
+  children,
+  back,
+  ...props
+}) {
   const [, setScreen] = useScreen();
 
   function handleClick() {
@@ -10,7 +16,12 @@ export default function ScreenButton({ screen, onClick, children, ...props }) {
   }
 
   return (
-    <button type="button" onClick={handleClick} {...props}>
+    <button
+      type="button"
+      onClick={handleClick}
+      {...props}
+      style={back && { alignSelf: "flex-start" }}>
+      {back && <IoIosArrowBack />}
       {children}
     </button>
   );
@@ -20,4 +31,5 @@ ScreenButton.propTypes = {
   screen: PropTypes.string.isRequired,
   onClick: PropTypes.func,
   children: PropTypes.node.isRequired,
+  back: PropTypes.bool,
 };
