@@ -20,6 +20,17 @@
   box-sizing: border-box;
 }
 
+*::-webkit-scrollbar {
+  width: 10px;
+  height: 6px;
+  background-color: transparent;
+}
+
+*::-webkit-scrollbar-thumb {
+  background: var(--primary-color);
+  border-radius: 4px;
+}
+
 h1,
 h2,
 h3,
@@ -59,9 +70,11 @@ body {
 
 #root {
   width: 100vw;
+  height: 90vh;
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
+  overflow-y: auto;
 }
 
 h1 {
