@@ -1,43 +1,33 @@
-// App.js
-import { useEffect } from "react";
 import css from "./App.module.css";
-import _ from "lodash";
-import words from "./words.json";
-import Game from "./components/Game";
-import { useDispatch, useSelector } from "react-redux";
-import { updateWordsCollection } from "./redux/game/gameSlice";
-import Results from "./components/Results";
-import Round from "./components/Round";
-import Teams from "./components/Teams";
 import Menu from "./components/Menu";
+import Teams from "./components/Teams";
+import Categories from "./components/Categories";
 import Settings from "./components/Settings";
 import GetReady from "./components/GetReady";
+import Game from "./components/Game";
+import Round from "./components/Round";
+import Results from "./components/Results";
 import Winner from "./components/Winner";
 import useScreen from "./hooks/useScreen";
-import { getWordsCollection } from "./redux/game/gameSelectors";
+import { useEffect } from "react";
 
 const App = () => {
-  const dispatch = useDispatch();
-  const shuffledWords = _.shuffle(words);
-  const [screen] = useScreen();
-  const wordsCollection = useSelector(getWordsCollection);
+  const [screen, setScreen] = useScreen();
 
   useEffect(() => {
-    if (wordsCollection.length === 0) {
-      dispatch(updateWordsCollection(shuffledWords));
-    }
-  }, [wordsCollection]);
+    setScreen("menu");
+  }, []);
 
   return (
     <div className={css.app}>
-      {/* <button onClick={() => setScreen("menu")}>Screen</button> */}
-      {screen === "game" && <Game />}
-      {screen === "results" && <Results />}
-      {screen === "round" && <Round />}
-      {screen === "teams" && <Teams />}
       {screen === "menu" && <Menu />}
+      {screen === "teams" && <Teams />}
+      {screen === "categories" && <Categories />}
       {screen === "settings" && <Settings />}
       {screen === "getReady" && <GetReady />}
+      {screen === "game" && <Game />}
+      {screen === "round" && <Round />}
+      {screen === "results" && <Results />}
       {screen === "winner" && <Winner />}
     </div>
   );
