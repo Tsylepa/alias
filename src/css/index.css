@@ -50,6 +50,10 @@ li {
   list-style: none;
 }
 
+input {
+  font: inherit;
+}
+
 a {
   font-weight: 500;
   color: #646cff;
@@ -66,6 +70,7 @@ body {
   min-width: 320px;
   min-height: 100vh;
   background-color: var(--secondary-color);
+  font-family: "Montserrat Alternates", sans-serif;
 }
 
 #root {
