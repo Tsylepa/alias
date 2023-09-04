@@ -3,3 +3,15 @@
   align-items: center;
   gap: 10px;
 }
+
+.list {
+  background-color: var(--btn-bg-color);
+}
+
+.opt {
+  background-color: var(--secondary-color);
+  color: var(--secondary-color);
+}
+
+.opt:hover {
+}

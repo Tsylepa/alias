@@ -41,6 +41,45 @@ export default function LanguageSelector() {
       options={options}
       onChange={handleSelect}
       defaultValue={options.find((op) => op.value === language)}
+      classNames={{
+        // input: () => css.inp,
+        option: () => css.opt,
+      }}
+      styles={{
+        control: (baseStyles) => ({
+          ...baseStyles,
+          cursor: "pointer",
+          width: 200,
+        }),
+        input: () => ({ display: "none" }),
+        menu: (baseStyles) => ({
+          ...baseStyles,
+          margin: 0,
+          padding: 0,
+          overflow: "hidden",
+          border: "1px solid var(--contrast-color)",
+        }),
+        menuList: (baseStyles) => ({
+          ...baseStyles,
+          // outline: "2px solid tomato",
+          padding: 0,
+        }),
+        option: (baseStyles) => ({
+          ...baseStyles,
+          cursor: "pointer",
+          color: "var(--contrast-color)",
+        }),
+      }}
+      theme={(theme) => ({
+        ...theme,
+        colors: {
+          ...theme.colors,
+          primary25: "var(--btn-color)",
+          primary: "var(--btn-bg-color)",
+          neutral0: "var(--secondary-color)",
+          neutral80: "var(--primary-color)",
+        },
+      })}
     />
   );
 }
