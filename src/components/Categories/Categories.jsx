@@ -13,8 +13,10 @@ export default function Categories() {
   const language = useSelector(getLanguage);
   const text = translation();
 
-  function handleCategory(category) {
-    const words = getWords(language, category);
+  async function handleCategory(category) {
+    const words = await getWords(language, category);
+    dispatch(updateWordsCollection(words));
+
     setScreen("settings");
     dispatch(updateWordsCollection(words));
     dispatch(updateCategory(category));

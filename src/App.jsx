@@ -33,9 +33,14 @@ const App = () => {
   }, []);
 
   useEffect(() => {
-    if (currentGame && words.length < 5) {
-      dispatch(updateWordsCollection(getWords(language, category)));
+    async function updateWords() {
+      if (currentGame && words.length < 5) {
+        const words = await getWords(language, category);
+        dispatch(updateWordsCollection(words));
+      }
     }
+
+    updateWords();
   }, [words]);
 
   return (
