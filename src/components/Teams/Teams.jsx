@@ -1,29 +1,55 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getTeams } from "src/redux/game/gameSelectors";
 import { updateTeams } from "src/redux/game/gameSlice";
 import { FaTrashAlt } from "react-icons/fa";
 import ScreenButton from "src/components/ScreenButton";
 import css from "./Teams.module.css";
 import translation from "src/utils/translation";
+import { getLanguage } from "src/redux/game/gameSelectors";
+import _ from "lodash";
 
 export default function Teams() {
   const dispatch = useDispatch();
-  const teams = useSelector(getTeams);
   const text = translation();
+  const language = useSelector(getLanguage);
 
-  const [teamsList, setTeamsList] = useState(teams);
+  const [teamsList, setTeamsList] = useState([]);
+  const [names, setNames] = useState([]);
 
   useEffect(() => {
-    setTeamsList(teams);
-  }, [teams]);
+    import(`./names/${language}/names.json`)
+      .then((names) => _.shuffle(names.default))
+      .then((names) => {
+        createInitialTeams(names.slice(0, 2));
+        setNames(names.slice(2));
+      });
+  }, [language]);
+
+  function createInitialTeams(names) {
+    const initialTeams = [];
+    for (let i = 0; i < 2; i++) {
+      if (names.length > 0) {
+        const newTeam = { id: i + 1, name: names[i], score: 0 };
+        initialTeams.push(newTeam);
+      }
+    }
+
+    setTeamsList(initialTeams);
+    dispatch(updateTeams(initialTeams));
+  }
 
   function addTeam() {
-    const newTeam = { id: teamsList.length + 1, name: "New Team", score: 0 };
+    const newTeam = { id: teamsList.length + 1, name: names[0], score: 0 };
     const updatedTeams = [...teamsList, newTeam];
-
     setTeamsList(updatedTeams);
     dispatch(updateTeams(updatedTeams));
+    updateNames();
+  }
+
+  function updateNames() {
+    const updatedNames = [...names];
+    updatedNames.shift();
+    setNames(updatedNames);
   }
 
   function changeName(e, teamId) {
@@ -67,7 +93,10 @@ export default function Teams() {
         </tbody>
       </table>
       <button onClick={addTeam}>+ {text.addTeam}</button>
-      <ScreenButton screen="categories" className={css.continue}>
+      <ScreenButton
+        screen="categories"
+        className={css.continue}
+        disabled={teamsList.length < 2}>
         {text.continue}
       </ScreenButton>
     </>

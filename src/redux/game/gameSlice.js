@@ -10,10 +10,6 @@ const initialState = {
   screen: "menu",
   language: "en",
   currentGame: null,
-  teams: [
-    { id: 1, name: "Team One", score: 0 },
-    { id: 2, name: "Team Two", score: 0 },
-  ],
   modal: false,
 };
 
@@ -43,7 +39,6 @@ const gameSlice = createSlice({
       state.screen = action.payload;
     },
     newGame(state) {
-      state.teams = initialState.teams;
       state.wordsCollection = initialState.wordsCollection;
       state.currentTeam = initialState.currentTeam;
       state.currentGame = initialState.currentGame;
