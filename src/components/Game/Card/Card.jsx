@@ -8,7 +8,11 @@ const Card = () => {
 
   return (
     <div className={css.card}>
-      <p className={css.word}>{wordsCollection[0]}</p>
+      <p
+        className={css.word}
+        style={{ fontSize: 33 - wordsCollection[0].length }}>
+        {wordsCollection[0]}
+      </p>
     </div>
   );
 };
